@@ -34,3 +34,41 @@ int isempty(stack* s)
         return 0;
     }
 }
+
+// 压栈(进栈)
+int push(stack* s, elementType push_data)
+{
+    stack* new_push = (stack*)malloc(sizeof(stack));
+    new_push -> data = push_data;
+    new_push -> next = s -> next;
+    s -> next = new_push;
+    return 1;
+}
+
+// 出栈
+int pull(stack* s, elementType* pull_data)
+{   
+    if (s->next==NULL)
+    {
+        printf("该链式栈是空的");
+        return 0;
+    }
+    stack* temp = s -> next;
+    s -> next = temp -> next;
+    *pull_data = temp -> data;
+    free(temp);
+    temp = NULL;
+    return 1;
+}
+
+// 获取栈顶元素
+int gettop(stack* s,elementType* get_data)
+{
+    if (s->next==NULL)
+    {
+        printf("该链式栈是空的");
+        return 0;
+    }
+    *get_data = s -> next -> data;
+    return 1;
+}
